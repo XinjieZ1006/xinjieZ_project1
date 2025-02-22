@@ -1,0 +1,20 @@
+{
+  "name": "xinjiez_project1",
+  "version": "1.0.0",
+  "description": "IGME-430 Project 1",
+  "homepage": "https://github.com/XinjieZ1006/xinjieZ_project1#readme",
+  "bugs": {
+    "url": "https://github.com/XinjieZ1006/xinjieZ_project1/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XinjieZ1006/xinjieZ_project1.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
