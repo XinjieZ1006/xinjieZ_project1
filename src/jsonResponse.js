@@ -99,7 +99,6 @@ const addRepo = (req, res) => {
       // if repo does not exist yet, create a new repo
       const repo = {
         id: Date.now(),
-        created: Date.getDate(),
         repo_name: repoName,
         username,
         topics: topic ? [topic] : [],
