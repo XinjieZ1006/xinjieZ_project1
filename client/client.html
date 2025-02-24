@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Our simple HTTP server</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+
+    <script src="/client.js" type="module">
+    </script>
+</head>
+
+<body>
+    <section id="top">
+        <h1>Project 1 Endpoint Tests</h1>
+        <h2>/getAllRepos</h2>
+        <form id="getAllRepos" action="/getAllRepos" method="get">
+            <select class="methodSelect">
+                <option value="get">GET</option>
+                <option value="head">HEAD</option>
+            </select>
+            <input type="submit" value="Get All Repos" />
+        </form>
+        <h2>/getAllReposShort</h2>
+        <form id="getAllReposShort" action="/getAllReposShort" method="get">
+            <select class="methodSelect">
+                <option value="get">GET</option>
+                <option value="head">HEAD</option>
+            </select>
+            <input type="submit" value="Get All Repos" />
+        </form>
+        <h2>/getRepo</h2>
+        <form id="getRepo" action="/getRepo" method="get">
+            <select class="methodSelect">
+                <option value="get">GET</option>
+                <option value="head">HEAD</option>
+            </select>
+            <label for="repoName">Repo Name: </label>
+            <input class="param" id="repoName" type="text" name="repo_name" />
+            <label for="uerName">Username: </label>
+            <input class="param" id="userName" type="text" name="username" />
+            <input type="submit" value="Get Repo By Name" />
+        </form>
+        <h2>/getReposByFilters</h2>
+        <form id="getReposByFilters" action="/getReposByFilters" method="get">
+            <select class="methodSelect">
+                <option value="get">GET</option>
+                <option value="head">HEAD</option>
+            </select>
+            <label for="topic">Topic: </label>
+            <input class="param" id="topic" type="text" name="topic" />
+            <label for="language">Language: </label>
+            <input class="param" id="language" type="text" name="language" />
+            <label for="type">Type: </label>
+            <select id="type" class="param" class="typeSelect" name="type">
+                <option value="">All</option>
+                <option value="Organization">Organization</option>
+                <option value="User">User</option>
+            </select>
+            <label for="stars">Minimum number of stars: </label>
+            <input class="param" id="stars" type="number" name="stars" />
+            <input type="submit" value="Get Repos By Filters" />
+        </form>
+        <h2>/addRepo</h2>
+        <form id="addRepo" action="/addRepo" method="post">
+            <label for="repoNameNew">Repo Name (required): </label>
+            <input class="param" id="repoNameNew" type="text" name="repo_name" />
+            <label for="uernameNew">Username(required): </label>
+            <input class="param" id="userNameNew" type="text" name="username" />
+            <label for="topicNew">Topic: </label>
+            <input class="param" id="topicNew" type="text" name="topic" />
+            <label for="languageNew">Language(required): </label>
+            <input class="param" id="languageNew" type="text" name="language" />
+            <label for="descriptionNew">Description: </label>
+            <input class="param" id="descriptionNew" type="text" name="description" />
+            <label for="typeNew">Type:(required) </label>
+            <select id="typeNew" class="param" class="typeSelect" name="type">
+                <option value="Organization">Organization</option>
+                <option value="User">Organization</option>
+            </select>
+            <input type="submit" value="Add New Repo" />
+        </form>
+        <h2>/addTopic</h2>
+        <form id="addTopic" action="/addTopic" method="post">
+            <label for="repoId">Repo ID (required): </label>
+            <input class="param" id="repoId" type="number" name="id" />
+            <label for="topicNew">Topic (required): </label>
+            <input class="param" id="topicNew2" type="text" name="topic" />
+            <input type="submit" value="Add Topic to Repo" />
+        </form>
+    </section>
+    <section id="content">
+    </section>
+</body>
+
+</html>
