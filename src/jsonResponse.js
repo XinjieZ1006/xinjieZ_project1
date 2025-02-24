@@ -98,7 +98,8 @@ const addRepo = (req, res) => {
     if (!repos.some((r) => r.repo_name === repoName && r.username === username)) {
       // if repo does not exist yet, create a new repo
       const repo = {
-        created: Date.now(),
+        id: Date.now(),
+        created: Date.getDate(),
         repo_name: repoName,
         username,
         topics: topic ? [topic] : [],
