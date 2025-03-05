@@ -20,7 +20,7 @@ const respondJSON = (req, res, status, object) => {
 
 const getAllRepos = (req, res) => {
   // just return the entire object
-  const responseJson = { repos };
+  const responseJson = repos;
   return respondJSON(req, res, 200, responseJson);
 };
 

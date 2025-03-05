@@ -1,95 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <head>
-    <title>Our simple HTTP server</title>
+    <title>GitHub Repo Finder</title>
     <link rel="stylesheet" type="text/css" href="/style.css">
-
     <script src="/client.js" type="module">
     </script>
+    <script src="https://kit.fontawesome.com/cfb86aa1b9.js" crossorigin="anonymous"></script>
+    <style>
+        .card {
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card:hover {
+            transform: scale(1.04);
+        }
+
+        .modal-card-head {
+            display: unset;
+        }
+    </style>
 </head>
 
 <body>
-    <section id="top">
-        <h1>Project 1 Endpoint Tests</h1>
-        <h2>/getAllRepos</h2>
-        <form id="getAllRepos" action="/getAllRepos" method="get">
-            <select class="methodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <input type="submit" value="Get All Repos" />
-        </form>
-        <h2>/getAllReposShort</h2>
-        <form id="getAllReposShort" action="/getAllReposShort" method="get">
-            <select class="methodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <input type="submit" value="Get All Repos" />
-        </form>
-        <h2>/getRepo</h2>
-        <form id="getRepo" action="/getRepo" method="get">
-            <select class="methodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <label for="repoName">Repo Name: </label>
-            <input class="param" id="repoName" type="text" name="repo_name" />
-            <label for="uerName">Username: </label>
-            <input class="param" id="userName" type="text" name="username" />
-            <input type="submit" value="Get Repo By Name" />
-        </form>
-        <h2>/getReposByFilters</h2>
-        <form id="getReposByFilters" action="/getReposByFilters" method="get">
-            <select class="methodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <label for="topic">Topic: </label>
-            <input class="param" id="topic" type="text" name="topic" />
-            <label for="language">Language: </label>
-            <input class="param" id="language" type="text" name="language" />
-            <label for="type">Type: </label>
-            <select id="type" class="param" class="typeSelect" name="type">
-                <option value="">All</option>
-                <option value="Organization">Organization</option>
-                <option value="User">User</option>
-            </select>
-            <label for="stars">Minimum number of stars: </label>
-            <input class="param" id="stars" type="number" name="stars" />
-            <input type="submit" value="Get Repos By Filters" />
-        </form>
-        <h2>/addRepo</h2>
-        <form id="addRepo" action="/addRepo" method="post">
-            <label for="repoNameNew">Repo Name (required): </label>
-            <input class="param" id="repoNameNew" type="text" name="repo_name" />
-            <label for="uernameNew">Username(required): </label>
-            <input class="param" id="userNameNew" type="text" name="username" />
-            <label for="topicNew">Topic: </label>
-            <input class="param" id="topicNew" type="text" name="topic" />
-            <label for="languageNew">Language(required): </label>
-            <input class="param" id="languageNew" type="text" name="language" />
-            <label for="descriptionNew">Description: </label>
-            <input class="param" id="descriptionNew" type="text" name="description" />
-            <label for="typeNew">Type:(required) </label>
-            <select id="typeNew" class="param" class="typeSelect" name="type">
-                <option value="Organization">Organization</option>
-                <option value="User">User</option>
-            </select>
-            <input type="submit" value="Add New Repo" />
-        </form>
-        <h2>/addTopic</h2>
-        <form id="addTopic" action="/addTopic" method="post">
-            <label for="repoId">Repo ID (required): </label>
-            <input class="param" id="repoId" type="number" name="id" />
-            <label for="topicNew">Topic (required): </label>
-            <input class="param" id="topicNew2" type="text" name="topic" />
-            <input type="submit" value="Add Topic to Repo" />
-        </form>
-    </section>
-    <section id="content">
-    </section>
+    <div class="mt-5">
+        <h1 class="title is-size-1 has-text-centered">Node.js Repo Finder</h1>
+        <h3 class="has-text-grey has-text-centered mb-5">Search for Top GitHub Repos About Node.js!</h3>
+    </div>
+
+    <div id="searchModes" class="tabs is-centered is-boxed is-medium">
+        <ul>
+            <li data-target="searchAll" class="is-active" onclick="switchMode(this)"><a>All Repos</a></li>
+            <li data-target="searchName" onclick="switchMode(this)"><a>Search By Name</a></li>
+            <li data-target="searchFilter" onclick="switchMode(this)"><a>Search By Filters</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div id="searchAll" class="field has-addons has-addons-centered searchBar">
+            <p class="control">
+                <span class="select">
+                    <select onchange="document.querySelector('#getAllRepos').action = this.value">
+                        <option value="/getAllRepos">Card</option>
+                        <option value="/getAllReposShort">Thumbnail</option>
+                    </select>
+                </span>
+            </p>
+            <form id="getAllRepos" action="/getAllRepos" method="get" class="field has-addons has-addons-centered">
+                <p class="control">
+                    <span class="select">
+                        <select class="methodSelect">
+                            <option value="get">GET</option>
+                            <option value="head">HEAD</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                <input class="button is-link" type="submit" value="Get All Repos" />
+                </p>
+            </form>
+
+
+        </div>
+        <div id="searchName" class="field has-addons has-addons-centered searchBar is-hidden">
+
+            <form id="getRepo" action="/getRepo" method="get" class="field has-addons has-addons-centered">
+                <p class="control">
+                    <span class="select">
+                        <select class="methodSelect">
+                            <option value="get">GET</option>
+                            <option value="head">HEAD</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                    <input class="param input" id="repoName" type="text" name="repo_name"
+                        placeholder="Enter Repo Name..." />
+                </p>
+                <p class="control">
+                    <input class="param input" id="userName" type="text" name="username"
+                        placeholder="Enter username..." />
+                </p>
+                <p class="control">
+                    <input class="button is-link" type="submit" value="Search" />
+                </p>
+            </form>
+
+        </div>
+        <div id="searchFilter" class="field has-addons has-addons-centered searchBar is-hidden">
+            <form id="getReposByFilters" action="/getReposByFilters" method="get"
+                class="field has-addons has-addons-centered">
+                <p class="control">
+                    <span class="select">
+                        <select class="methodSelect">
+                            <option value="get">GET</option>
+                            <option value="head">HEAD</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                    <input class="param input" id="topic" type="text" name="topic" placeholder="Enter topic..." />
+                </p>
+                <p class="control">
+                    <input class="param input" id="language" type="text" name="language"
+                        placeholder="Enter username..." />
+                </p>
+                <p class="control">
+                    <span class="select">
+                        <select id="type" class="param" class="typeSelect" name="type">
+                            <option value="">All</option>
+                            <option value="Organization">Organization</option>
+                            <option value="User">User</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                <input class="param input" id="stars" type="number" name="stars" placeholder="Minimun number of Stars"/>
+                </p>
+                <p class="control">
+                <input type="submit" value="Get Repos By Filters" class="button is-link"/>
+                </p>
+            </form>
+        </div>
+
+        <section id="top" class="section">
+            <h2>/getAllRepos</h2>
+            <form id="getAllRepos" action="/getAllRepos" method="get">
+                <select class="methodSelect">
+                    <option value="get">GET</option>
+                    <option value="head">HEAD</option>
+                </select>
+                <input type="submit" value="Get All Repos" />
+            </form>
+            <h2>/getAllReposShort</h2>
+            <form id="getAllReposShort" action="/getAllReposShort" method="get">
+                <select class="methodSelect">
+                    <option value="get">GET</option>
+                    <option value="head">HEAD</option>
+                </select>
+                <input type="submit" value="Get All Repos" />
+            </form>
+            <h2>/getRepo</h2>
+            <form id="getRepo" action="/getRepo" method="get">
+                <select class="methodSelect">
+                    <option value="get">GET</option>
+                    <option value="head">HEAD</option>
+                </select>
+                <label for="repoName">Repo Name: </label>
+                <input class="param" id="repoName" type="text" name="repo_name" />
+                <label for="uerName">Username: </label>
+                <input class="param" id="userName" type="text" name="username" />
+                <input type="submit" value="Get Repo By Name" />
+            </form>
+            <h2>/getReposByFilters</h2>
+            <form id="getReposByFilters" action="/getReposByFilters" method="get">
+                <select class="methodSelect">
+                    <option value="get">GET</option>
+                    <option value="head">HEAD</option>
+                </select>
+                <label for="topic">Topic: </label>
+                <input class="param" id="topic" type="text" name="topic" />
+                <label for="language">Language: </label>
+                <input class="param" id="language" type="text" name="language" />
+                <label for="type">Type: </label>
+                <select id="type" class="param" class="typeSelect" name="type">
+                    <option value="">All</option>
+                    <option value="Organization">Organization</option>
+                    <option value="User">User</option>
+                </select>
+                <input class="param" id="stars" type="number" name="stars" />
+                <input type="submit" value="Get Repos By Filters" />
+            </form>
+            <h2>/addRepo</h2>
+            <form id="addRepo" action="/addRepo" method="post">
+                <label for="repoNameNew">Repo Name (required): </label>
+                <input class="param" id="repoNameNew" type="text" name="repo_name" />
+                <label for="uernameNew">Username(required): </label>
+                <input class="param" id="userNameNew" type="text" name="username" />
+                <label for="topicNew">Topic: </label>
+                <input class="param" id="topicNew" type="text" name="topic" />
+                <label for="languageNew">Language(required): </label>
+                <input class="param" id="languageNew" type="text" name="language" />
+                <label for="descriptionNew">Description: </label>
+                <input class="param" id="descriptionNew" type="text" name="description" />
+                <label for="typeNew">Type:(required) </label>
+                <select id="typeNew" class="param" class="typeSelect" name="type">
+                    <option value="Organization">Organization</option>
+                    <option value="User">User</option>
+                </select>
+                <input type="submit" value="Add New Repo" />
+            </form>
+            <h2>/addTopic</h2>
+            <form id="addTopic" action="/addTopic" method="post">
+                <label for="repoId">Repo ID (required): </label>
+                <input class="param" id="repoId" type="number" name="id" />
+                <label for="topicNew">Topic (required): </label>
+                <input class="param" id="topicNew2" type="text" name="topic" />
+                <input type="submit" value="Add Topic to Repo" />
+            </form>
+        </section>
+        <div class="fixed-grid has-1-cols-mobile has-2-cols-desktop">
+            <div id="content" class="grid">
+            </div>
+        </div>
+        <div id="cardModal" class="modal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <h2 class="modal-card-title title has-text-link"></h2>
+                    <h3 class="modal-card-subtitle has-text-grey"></h3>
+                </header>
+                <section class="modal-card-body">
+                    <!-- Content ... -->
+                </section>
+                <footer class="modal-card-foot">
+                    <div id="modaltags">
+                    </div>
+                </footer>
+            </div>
+        </div>
 </body>
 
 </html>
+<script>
+    const switchMode = (e) => {
+        let tabs = document.querySelectorAll('.tabs ul li');
+        let searchBars = document.querySelectorAll('.searchBar')
+        tabs.forEach(t => {
+            // set current tab as the only active tab
+            t.classList.remove("is-active");
+            // hide other search bars
+            searchBars.forEach(bar => bar.classList.add("is-hidden"));
+        });
+        e.classList.add("is-active");
+        // set current search bar as active
+        const sb = document.querySelector(`#${e.dataset.target}`);
+        console.log(sb);
+        if (sb) {
+            sb.classList.remove("is-hidden");
+        }
+    }
+</script>
