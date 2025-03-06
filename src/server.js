@@ -8,6 +8,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000;
 // router for the urls
 const urlStruct = {
   '/': htmlHandler.getIndex,
+  '/docs': htmlHandler.getDoc,
   '/style.css': htmlHandler.getCSS,
   '/client.js': htmlHandler.getScript,
   '/getAllRepos': responses.getAllRepos,

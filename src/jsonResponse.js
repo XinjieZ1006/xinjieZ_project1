@@ -46,6 +46,12 @@ const getRepo = (req, res) => {
   }
 
   const result = filteredResults.filter((o) => o.repo_name === repoName && o.username === username);
+  if (result.length === 0) {
+    return respondJSON(req, res, 404, {
+      id: 'notfound',
+      message: 'Could not find result',
+    });
+  }
   return respondJSON(req, res, 200, result);
 };
 
@@ -60,6 +66,12 @@ const getReposByFilters = (req, res) => {
   if (type) filteredResults = filteredResults.filter((repo) => repo.type === type);
   if (stars) filteredResults = filteredResults.filter((repo) => repo.stars >= parseInt(stars, 10));
 
+  if (filteredResults.length === 0) {
+    return respondJSON(req, res, 404, {
+      id: 'notfound',
+      message: 'Could not find result',
+    });
+  }
   return respondJSON(req, res, 200, filteredResults);
 };
 
@@ -100,19 +112,23 @@ const addRepo = (req, res) => {
       const repo = {
         id: Date.now(),
         repo_name: repoName,
+        full_name: repoName + username,
         username,
         topics: topic ? [topic] : [],
         language,
         description,
         type,
+        stars: 0,
+        forks: 0,
+
       };
       repos.push(repo);
 
-      return respondJSON(req, res, 201, repo);
+      return respondJSON(req, res, 201, [repo]);
     }
 
     // will work on the update logic later
-    return respondJSON(req, res, 204, {});
+    return respondJSON(req, res, 204, [{}]);
   });
 };
 
@@ -161,7 +177,7 @@ const addTopic = (req, res) => {
       repo.topics.push(topic);
     }
 
-    return respondJSON(req, res, 201, repo);
+    return respondJSON(req, res, 201, [repo]);
   });
 };
 

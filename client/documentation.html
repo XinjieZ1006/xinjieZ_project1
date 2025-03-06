@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation</title>
+</head>
+
+<body>
+    <header class="section">
+        <p class="has-text-centered has-text-link title is-size-1">API Documentation</p>
+    </header>
+    <div class="container grid">
+        <section class="section cell">
+            <div class="box">
+                <header class="header is-clickable" onclick="toggleCollapse(this)">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <p class="title is-size-4 has-text-link">/getAllRepos</p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <span class="tag">GET</span>
+                                <span class="tag">HEAD</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="content is-hidden">
+                    <form id="getAllRepos" action="/getAllRepos" method="get" class="field">
+                        <div class="select">
+                            <select class="methodSelect">
+                                <option value="get">GET</option>
+                                <option value="head">HEAD</option>
+                            </select>
+                        </div>
+                        <input class="button" type="submit" value="Test" />
+                    </form>
+                </div>
+            </div>
+            <div class="box">
+                <header class="header is-clickable " onclick="toggleCollapse(this)">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <p class="title is-size-4 has-text-link">/getAllReposShort</p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <span class="tag">GET</span>
+                                <span class="tag">HEAD</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="content is-hidden">
+                    <form id="getAllReposShort" action="/getAllReposShort" method="get">
+                        <div class="select">
+                            <select class="methodSelect">
+                                <option value="get">GET</option>
+                                <option value="head">HEAD</option>
+                            </select>
+                        </div>
+
+                        <input class="button" type="submit" value="Test" />
+                    </form>
+                </div>
+            </div>
+            <div class="box">
+                <header class="header is-clickable" onclick="toggleCollapse(this)">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <p class="title is-size-4 has-text-link">/getRepo</p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <span class="tag">GET</span>
+                                <span class="tag">HEAD</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="content is-hidden">
+                    <form id="getRepo" action="/getRepo" method="get">
+                        <div class="select">
+                            <select class="methodSelect">
+                                <option value="get">GET</option>
+                                <option value="head">HEAD</option>
+                            </select>
+                        </div>
+                        <div class="content">
+                            <label for="repoName">Repo Name: </label>
+                            <input class="param input" id="repoName" type="text" name="repo_name" />
+                            <label for="uerName">Username: </label>
+                            <input class="param input" id="userName" type="text" name="username" />
+                            <input type="submit" value="Test" class="button" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="box">
+                <header class="header is-clickable" onclick="toggleCollapse(this)">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <p class="title is-size-4 has-text-link">/getReposByFilters</p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <span class="tag">GET</span>
+                                <span class="tag">HEAD</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="content is-hidden">
+                    <form id="getReposByFilters" action="/getReposByFilters" method="get">
+                        <div class="select">
+                            <select class="methodSelect">
+                                <option value="get">GET</option>
+                                <option value="head">HEAD</option>
+                            </select>
+                        </div>
+                        <div class="content">
+                            <label for="type">Type: </label>
+                            <div class="select">
+                                <select id="type" class="param" class="typeSelect" name="type">
+                                    <option value="">All</option>
+                                    <option value="Organization">Organization</option>
+                                    <option value="User">User</option>
+                                </select>
+                            </div>
+                            <label for="topic">Topic: </label>
+                            <input class="param input" id="topic" type="text" name="topic" />
+                            <label for="language">Language: </label>
+                            <input class="param input" id="language" type="text" name="language" />
+                            <label for="stars">Minimum number of stars: </label>
+                            <input class="param input" id="stars" type="number" name="stars" />
+                            <input class="button" type="submit" value="Test" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="box">
+                <header class="header is-clickable" onclick="toggleCollapse(this)">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <p class="title is-size-4 has-text-link">/addRepo</p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <span class="tag">POST</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="content is-hidden">
+                    <form id="addRepo" action="/addRepo" method="post">
+                        <label for="repoNameNew">Repo Name (required): </label>
+                        <input class="param input" id="repoNameNew" type="text" name="repo_name" />
+                        <label for="uernameNew">Username(required): </label>
+                        <input class="param input" id="userNameNew" type="text" name="username" />
+                        <label for="topicNew">Topic: </label>
+                        <input class="param input" id="topicNew" type="text" name="topic" />
+                        <label for="languageNew">Language(required): </label>
+                        <input class="param input" id="languageNew" type="text" name="language" />
+                        <label for="descriptionNew">Description: </label>
+                        <input class="param input" id="descriptionNew" type="text" name="description" />
+                        <label for="typeNew">Type:(required) </label>
+                        <div class="select">
+                            <select id="typeNew" class="param select" class="typeSelect" name="type">
+                                <option value="Organization">Organization</option>
+                                <option value="User">Organization</option>
+                            </select>
+                        </div>
+                        <input class="button" type="submit" value="Test" />
+                    </form>
+                </div>
+            </div>
+            <div class="box">
+                <header class="header is-clickable" onclick="toggleCollapse(this)">
+                    <div class="level">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <p class="title is-size-4 has-text-link">/addTopic</p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <span class="tag">POST</span>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="content is-hidden">
+                    <form id="addTopic" action="/addTopic" method="post">
+                        <label for="repoId">Repo ID (required): </label>
+                        <input class="param input" id="repoId" type="number" name="id" />
+                        <label for="topicNew">Topic (required): </label>
+                        <input class="param input" id="topicNew2" type="text" name="topic" />
+                        <input class="button" type="submit" value="Add Topic to Repo" />
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="cell has-text-centered">
+            <p id="content" class="is-centered">Test results will be shown here</p>
+        </section>
+
+    </div>
+
+
+</body>
+
+</html>
+<script>
+    const toggleCollapse = (el) => {
+        el = el.parentElement.querySelector(".content");
+        el.classList.toggle("is-hidden");
+    }
+    const handleResponse = async (res, parseRes) => {
+        const pageContent = document.querySelector('#content');
+
+        let contentType = res.headers.get('Content-type');
+        const contentLength = res.headers.get("Content-Length");
+
+        switch (res.status) {
+            case 200:
+                pageContent.innerHTML = `<b>Success</b>`
+                break;
+            case 404:
+                pageContent.innerHTML = `<b>Not found</b>`
+                break;
+            case 201:
+                pageContent.innerHTML = `<b>Created</b>`
+                break;
+            case 204:
+                pageContent.innerHTML = `<b>Updated (No content)</b>`
+                break;
+            case 400:
+                pageContent.innerHTML = `<b>Bad Request</b>`;
+                break;
+        }
+
+        // determine if response should be parsed
+        const resText = await res.text();
+        let resJson;
+        if (resText) {
+            resJson = JSON.parse(resText);
+        } else {
+            resJson = {};
+        }
+        console.log(resJson);
+        pageContent.innerHTML += `<br/><b>Status Code: ${res.status}</b><br/>`;
+        pageContent.innerHTML += `<b>Content-Length: ${contentLength}</b>`;
+        if (parseRes) {
+            // print shortened version of the json text
+            let jsonString = JSON.stringify(resJson);
+            pageContent.innerHTML += `<p>${jsonString.substring(0, 1000) + '...'}</p>`
+        }
+    }
+
+    const handleGet = async (userForm, params) => {
+        let urlParams = new URLSearchParams({});
+        Object.entries(params).forEach(([key, value]) => {
+            urlParams.append(key, value);
+        })
+        const url = new URL(userForm.action);
+        url.search = urlParams.toString();
+        const method = userForm.querySelector('.methodSelect').value;
+        console.log(`method: ${method}`);
+        const options = {
+            method,
+            headers: { 'Accept': 'application/json' }
+        }
+        try {
+            let response = await fetch(url, options);
+            handleResponse(response, method === 'get');
+        }
+        catch {
+            console.log('oopsie there is an error...');
+        }
+    }
+
+    const handlePost = async (userForm, params) => {
+        let url = userForm.action;
+        console.log('sending fetch')
+        const options = {
+            method: 'post',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(params),
+        }
+
+        try {
+            let response = await fetch(url, options);
+            handleResponse(response, true);
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+
+    const sendFetch = (userForm, params) => {
+        if (userForm.method === 'post') {
+            handlePost(userForm, params);
+        }
+        else {
+            handleGet(userForm, params);
+        }
+
+    }
+
+    const setForm = (form) => {
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            const fields = form.querySelectorAll(".param");
+            // create a empty object to hold params
+            const params = {};
+            // loop through all the param fields, forming the params object
+            fields.forEach(i => {
+                //params.append(i.name, i.value);
+                params[i.name] = i.value;
+            });
+            sendFetch(form, params);
+            return false;
+        }
+    }
+
+    // setup
+    const getAllReposForm = document.querySelector("#getAllRepos");
+    const getAllReposShort = document.querySelector("#getAllReposShort");
+
+    // setForm(document.querySelector("#getAllRepos"));
+    // setForm(document.querySelector("#getAllReposShort"));
+    // setForm(document.querySelector("#getRepo"));
+
+    const forms = document.querySelectorAll('form');
+    forms.forEach(f => {
+        setForm(f);
+    })
+</script>
